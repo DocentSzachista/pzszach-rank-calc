@@ -2,8 +2,13 @@ import { useState} from "react";
 
 const PlayerCard = (props) => {
     const [gender, setGender] = useState("M");
+    const [option, setOption] = useState("ND");
     const rankingValues ={
     "K":[
+        {
+            "name": "BK",
+            "value": 1000
+        },
         {
             "name": "V",
             "value": 1000
@@ -31,6 +36,10 @@ const PlayerCard = (props) => {
     ],
     "M":[
         {
+            "name": "BK",
+            "value": 1000
+        },
+        {
             "name": "V",
             "value": 1200
         },
@@ -57,34 +66,60 @@ const PlayerCard = (props) => {
     ]
     };
     const updateGender = event =>{
-        setGender(event.target.value);
-        console.log(gender);
+        const newGender = event.target.value;
+        setGender(newGender);
+        round.ranking = rankingValues[newGender].filter(rank => rank.name === option )[0].value;
+        updateOpponents();
     };
     const round = props.round;
+    const updateOpponents = props.updateOpponents;
+    
+    const handleRanking = event =>{
+        const category = event.target.value;
+        const filtered = rankingValues[gender].filter(rank => rank.name === category ); 
+        round.ranking = filtered[0].value;
+        setOption(category);
+        updateOpponents();
+    };
+    const handleScore = event => {
+        round.score = parseInt(event.target.value);
+        updateOpponents();
+    };
+    
     return (
-        <div>
-            <h2>
-                Runda {round.roundNumber}
-            </h2>
-            <div>
-                <div>
-                <h3>Płeć</h3>
-                <input type="radio" value="M" name="gender" checked={round.gender === "M"} onChange={updateGender}/>
-                <label for="gender"> męższczyzna </label>
-                <input type="radio" value="K" name="gender" checked={round.gender === "K"} onChange={updateGender}/>
-                <label for="gender"> kobieta </label>
-                </div>
-                <div>
-                    <h3>Ranking zawodnika</h3>
-                    <select name="ranking">
-                    {    rankingValues[gender].map(
+        <div className="card">
+            <h3>
+                
+                {round.roundNumber === 0 ? "Gracz" : `Runda ${round.roundNumber}`  }
+            </h3>
+            <div className="grid">
+                <label>Płeć
+                    <select value={gender} onChange={updateGender}>
+                        <option value={"M"}>mężczyzna</option>
+                        <option value={"K"}>kobieta</option>
+                    </select>
+                </label>
+                <label>Ranking zawodnika
+                    <select name="ranking" onChange={handleRanking}>
+                    {    
+                        rankingValues[gender].map(
                             rank => {
-                                <option value={rank.value}> {rank.name}({rank.value}) </option>
+                                return <option value={rank.name}> {rank.name}({rank.value}) </option>;
                             }
                         )
                     }
                     </select>
-                </div>
+                </label>
+                { round.roundNumber === 0 ? "" :
+                <label>
+                    Wynik
+                    <select value={null} onChange={handleScore}>
+                        <option value={0}> Przegrana (0) </option>
+                        <option value={1}> Wygrana (1) </option>
+                        <option value={0.5}> Remis (0.5) </option>
+                    </select>
+                </label>
+                }
             </div>
         </div>
     );
