@@ -1,48 +1,72 @@
 import "./styles/App.css";
 import PlayerCard from './components/PlayerCard';
 import { useState } from 'react';
-// import './App.css';
-
+import {countMeanRanking, countNorm, countDeltaR, countRu } from "./utils";
+import Description from "./components/Descritpion";
+import {rankRequirements, encodedCategories} from "./resources/requirements"; 
 function App() {
 
   const [opponents, setOpponents] = useState([{
     "roundNumber": 0,
-    "ranking": 1000,
-    // "score": undefined,
+    "category": "BK",
+    "gender": "M"
   }]);
+
   const addNewOpponent = function() {
     const newOpponent = {
       "roundNumber": opponents.length,
-      "ranking": 1000,
-      "score": undefined
+      "category": "BK",
+      "score": undefined,
+      "gender": "M"
     }
     setOpponents(
       [...opponents, newOpponent]
     );
   };
+
+
   const updateOpponents = () =>{
     setOpponents(
       opponents
     );
-    console.log( countMeanRanking());
-    // console.log(opponents);
+    const mean = countMeanRanking(opponents);
+    
+    const eglibleRanks = Object.keys(rankRequirements)
+    .filter(
+      key => encodedCategories[opponents[0].category] > encodedCategories[key]
+    ) 
+    console.log(eglibleRanks);
+    console.log(`Średni ranking graczy w turnieju: ${mean}`);
+
+    const chosenCategory  = rankRequirements[eglibleRanks[0]];
+    const minimum = countNorm(mean, chosenCategory[opponents[0].gender], opponents.length);
+    const deltaR = countDeltaR(opponents); 
+    const Ru = countRu(chosenCategory[opponents[0].gender], deltaR);
+    console.log(`delta R ${deltaR}`);
+    console.log(`Ruz ${Ru}`);
+    // console.log(`Uzyskano normę ${minimum}`);
+    if( chosenCategory[opponents[0].gender] <= Ru && chosenCategory["requiredGames"] === opponents.length - 1  ){
+      console.log(`Uzyskano normę ${minimum}`);
+    }
   }
-  const countMeanRanking = () => opponents.length /(opponents.length+1) * opponents.reduce( 
-      (previous, opponent) => previous + opponent.ranking , 0); 
+
+
   return (
-    <div>
-      <div className="app">
+    <main className="container">
+      <Description />
+
       {
         opponents.map(
           oponent => {
-            return <PlayerCard round={oponent} updateOpponents={updateOpponents}/> // updateScore={updateScore} updateRanking={updateRanking} />;
+            return <PlayerCard round={oponent} updateOpponents={updateOpponents}/> 
           }
         )
       }
-      <button onClick={addNewOpponent}>Add round</button>
-
+      <div className="grid">
+      <button className="primary" onClick={addNewOpponent}>Add round</button>
+      <button className="secondary">Pokaż statystyki</button>
       </div>
-    </div>
+    </main>
   );
 }
 

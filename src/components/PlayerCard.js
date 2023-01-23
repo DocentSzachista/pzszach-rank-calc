@@ -1,100 +1,37 @@
-import { useState} from "react";
+import { rankingValues } from "../resources/requirements";
 
 const PlayerCard = (props) => {
-    const [gender, setGender] = useState("M");
-    const [option, setOption] = useState("ND");
-    const rankingValues ={
-    "K":[
-        {
-            "name": "BK",
-            "value": 1000
-        },
-        {
-            "name": "V",
-            "value": 1000
-        },
-        {
-            "name": "IV",
-            "value": 1200
-        },
-        {
-            "name": "III",
-            "value": 1450
-        },
-        {
-            "name": "II",
-            "value": 1600
-        },
-        {
-            "name": "I",
-            "value": 1800
-        },
-        {
-            "name": "k",
-            "value": 2000
-        }
-    ],
-    "M":[
-        {
-            "name": "BK",
-            "value": 1000
-        },
-        {
-            "name": "V",
-            "value": 1200
-        },
-        {
-            "name": "IV",
-            "value": 1400
-        },
-        {
-            "name": "III",
-            "value": 1600
-        },
-        {
-            "name": "II",
-            "value": 1800
-        },
-        {
-            "name": "I",
-            "value": 2000
-        },
-        {
-            "name": "k",
-            "value": 2200
-        }
-    ]
-    };
-    const updateGender = event =>{
-        const newGender = event.target.value;
-        setGender(newGender);
-        round.ranking = rankingValues[newGender].filter(rank => rank.name === option )[0].value;
-        updateOpponents();
-    };
     const round = props.round;
     const updateOpponents = props.updateOpponents;
-    
+
+    const updateGender = event =>{
+        const newGender = event.target.value;
+        round.gender = newGender
+        updateOpponents();
+    };
+
     const handleRanking = event =>{
         const category = event.target.value;
-        const filtered = rankingValues[gender].filter(rank => rank.name === category ); 
-        round.ranking = filtered[0].value;
-        setOption(category);
+        round.category = category;
         updateOpponents();
     };
     const handleScore = event => {
-        round.score = parseInt(event.target.value);
+        round.score = parseFloat(event.target.value);
         updateOpponents();
     };
     
     return (
-        <div className="card">
-            <h3>
-                
-                {round.roundNumber === 0 ? "Gracz" : `Runda ${round.roundNumber}`  }
-            </h3>
+        <article>
+            <hgroup>
+                <h1>
+                    {round.roundNumber === 0 ? "Gracz" : `Runda ${round.roundNumber}`  }
+                </h1>
+                <h2>
+                </h2>
+            </hgroup>
             <div className="grid">
                 <label>Płeć
-                    <select value={gender} onChange={updateGender}>
+                    <select value={round.gender} onChange={updateGender}>
                         <option value={"M"}>mężczyzna</option>
                         <option value={"K"}>kobieta</option>
                     </select>
@@ -102,7 +39,7 @@ const PlayerCard = (props) => {
                 <label>Ranking zawodnika
                     <select name="ranking" onChange={handleRanking}>
                     {    
-                        rankingValues[gender].map(
+                        rankingValues[round.gender].map(
                             rank => {
                                 return <option value={rank.name}> {rank.name}({rank.value}) </option>;
                             }
@@ -121,7 +58,7 @@ const PlayerCard = (props) => {
                 </label>
                 }
             </div>
-        </div>
+        </article>
     );
 };
 export default PlayerCard;
