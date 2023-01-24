@@ -32,6 +32,7 @@ const Description = () =>{
                     </summary>
                     <p>
                         Stronka jest jeszcze w stanie work in progress, dlatego mogą się zdarzyć jeszcze pewne niedociągnięcia.
+                        Jeżeli chcesz zgłosić usterkę, bądź propozycję do usprawnienia, wystaw Issue na <a href="https://github.com/DocentSzachista/pzszach-rank-calc/issues" target="_blank" rel="noopener noreferrer">Githubie </a>
                     </p>
                 </details>
             </div>
