@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/%7Bpzszach-rank-calc%7D/static/css/main.12fa6cd0.css",
+    "main.js": "/%7Bpzszach-rank-calc%7D/static/js/main.72cfebb1.js",
+    "static/js/787.23e3d24d.chunk.js": "/%7Bpzszach-rank-calc%7D/static/js/787.23e3d24d.chunk.js",
+    "index.html": "/%7Bpzszach-rank-calc%7D/index.html",
+    "main.12fa6cd0.css.map": "/%7Bpzszach-rank-calc%7D/static/css/main.12fa6cd0.css.map",
+    "main.72cfebb1.js.map": "/%7Bpzszach-rank-calc%7D/static/js/main.72cfebb1.js.map",
+    "787.23e3d24d.chunk.js.map": "/%7Bpzszach-rank-calc%7D/static/js/787.23e3d24d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.12fa6cd0.css",
+    "static/js/main.72cfebb1.js"
+  ]
+}
