@@ -51,9 +51,9 @@ const PlayerCard = (props) => {
                 <label>
                     Wynik
                     <select value={null} onChange={handleScore}>
-                        <option value={0}> Przegrana (0) </option>
+                        <option value={-1}> Przegrana (0) </option>
                         <option value={1}> Wygrana (1) </option>
-                        <option value={0.5}> Remis (0.5) </option>
+                        <option value={0}> Remis (0.5) </option>
                     </select>
                 </label>
                 }

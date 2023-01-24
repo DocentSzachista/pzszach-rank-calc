@@ -1,9 +1,9 @@
 import "./styles/App.css";
 import PlayerCard from './components/PlayerCard';
+import Modal from "./components/Modal";
 import { useState } from 'react';
-import {countMeanRanking, countNorm, countDeltaR, countRu } from "./utils";
+import {calculatePlayerChanges } from "./utils";
 import Description from "./components/Descritpion";
-import {rankRequirements, encodedCategories} from "./resources/requirements"; 
 function App() {
 
   const [opponents, setOpponents] = useState([{
@@ -11,6 +11,15 @@ function App() {
     "category": "BK",
     "gender": "M"
   }]);
+  const [rankBlob, setRankBlob] = useState({
+    "currentRuz": undefined,
+    "normsAchieved":[]
+  });
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModalClick = () =>{
+    setShowModal(!showModal);
+  };
 
   const addNewOpponent = function() {
     const newOpponent = {
@@ -29,25 +38,8 @@ function App() {
     setOpponents(
       opponents
     );
-    const mean = countMeanRanking(opponents);
-    
-    const eglibleRanks = Object.keys(rankRequirements)
-    .filter(
-      key => encodedCategories[opponents[0].category] > encodedCategories[key]
-    ) 
-    console.log(eglibleRanks);
-    console.log(`Średni ranking graczy w turnieju: ${mean}`);
-
-    const chosenCategory  = rankRequirements[eglibleRanks[0]];
-    const minimum = countNorm(mean, chosenCategory[opponents[0].gender], opponents.length);
-    const deltaR = countDeltaR(opponents); 
-    const Ru = countRu(chosenCategory[opponents[0].gender], deltaR);
-    console.log(`delta R ${deltaR}`);
-    console.log(`Ruz ${Ru}`);
-    // console.log(`Uzyskano normę ${minimum}`);
-    if( chosenCategory[opponents[0].gender] <= Ru && chosenCategory["requiredGames"] === opponents.length - 1  ){
-      console.log(`Uzyskano normę ${minimum}`);
-    }
+    // here handle all the calculations 
+    setRankBlob(calculatePlayerChanges(opponents));
   }
 
 
@@ -63,9 +55,10 @@ function App() {
         )
       }
       <div className="grid">
-      <button className="primary" onClick={addNewOpponent}>Add round</button>
-      <button className="secondary">Pokaż statystyki</button>
+        <button className="primary" onClick={addNewOpponent}>Add round</button>
+        <button className="secondary" onClick={handleModalClick}>Pokaż statystyki</button>
       </div>
+      <Modal rankBlob={rankBlob} show={showModal} onClose={handleModalClick} />
     </main>
   );
 }
