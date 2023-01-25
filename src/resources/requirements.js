@@ -33,10 +33,28 @@ export const rankRequirements = {
         "K": 1600,
         "requiredGames": 7
     },
+    "II+":{
+        "name": "mała norma do pierwszej kategorii",
+        "M": 2000,
+        "K": 1800,
+        "requiredGames": 7
+    },
     "I":{
         "name": "pierwsza kategoria",
         "M": 2000,
         "K": 1800,
+        "requiredGames": 9
+    },
+    "I+":{
+        "name": "mała norma na kandydata",
+        "M": 2200,
+        "K": 2000,
+        "requiredGames": 9
+    },
+    "I++":{
+        "name": "druga mała norma na kandydata",
+        "M": 2200,
+        "K": 2000,
         "requiredGames": 9
     },
     "k":{
@@ -76,12 +94,28 @@ export const rankingValues = {
             "value": 1600
         },
         {
+            "name": "II+",
+            "value": 1700
+        },
+        {
             "name": "I",
             "value": 1800
         },
         {
+            "name": "I+",
+            "value": 1900
+        },
+        {
+            "name": "I++",
+            "value": 1900
+        },
+        {
             "name": "k",
             "value": 2000
+        },
+        {
+            "name": "M",
+            "value": 2200
         }
     ],
     "M":[
@@ -106,12 +140,28 @@ export const rankingValues = {
             "value": 1800
         },
         {
+            "name": "II+",
+            "value": 1900
+        },
+        {
             "name": "I",
             "value": 2000
         },
         {
+            "name": "I+",
+            "value": 2100
+        },
+        {
+            "name": "I++",
+            "value": 2100
+        },
+        {
             "name": "k",
             "value": 2200
+        },
+        {
+            "name": "M",
+            "value": 2400
         }
     ]
     };
