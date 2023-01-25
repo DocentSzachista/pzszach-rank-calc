@@ -38,9 +38,9 @@ function App() {
   };
   
   const handleStatisticsButton = () =>{
-    if (opponents.length <5 && disabledButton)
+    if (opponents.length <5 && !disabledButton)
       setDisabledButton(true);
-    else if (!disabledButton && opponents.length === 5) 
+    else if (disabledButton && opponents.length === 5) 
       setDisabledButton(false);
   };
 
@@ -50,6 +50,7 @@ function App() {
     );
     // here handle all the calculations 
     setRankBlob(calculatePlayerChanges(opponents));
+    console.log(rankBlob);
   };
 
   const handleOpponentRemoval = (index) =>{

@@ -1,10 +1,13 @@
 export const encodedCategories = {
-    "BK": 8,
-    "V": 7,
-    "IV": 6,
-    "III": 5,
-    "II": 4,
-    "I": 3,
+    "BK": 11,
+    "V": 10,
+    "IV": 9,
+    "III": 8,
+    "II": 7,
+    "II+":6,
+    "I": 5,
+    "I+": 4,
+    "I++": 3,
     "k": 2,
     "M": 1
 }
