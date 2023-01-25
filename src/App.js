@@ -7,15 +7,18 @@ import Description from "./components/Descritpion";
 function App() {
 
   const [opponents, setOpponents] = useState([{
-    "roundNumber": 0,
+    // "roundNumber": 0,
     "category": "BK",
-    "gender": "M"
+    "gender": "M",
+    "isPlayer": true 
   }]);
   const [rankBlob, setRankBlob] = useState({
     "currentRuz": undefined,
     "normsAchieved":[]
   });
+  
   const [showModal, setShowModal] = useState(false);
+  const [disabledButton, setDisabledButton] = useState(true);
 
   const handleModalClick = () =>{
     setShowModal(!showModal);
@@ -23,16 +26,23 @@ function App() {
 
   const addNewOpponent = function() {
     const newOpponent = {
-      "roundNumber": opponents.length,
       "category": "BK",
-      "score": undefined,
+      "score": 0,
       "gender": "M"
     }
     setOpponents(
       [...opponents, newOpponent]
     );
+    setRankBlob(calculatePlayerChanges(opponents));
+    handleStatisticsButton();
   };
-
+  
+  const handleStatisticsButton = () =>{
+    if (opponents.length <5 && disabledButton)
+      setDisabledButton(true);
+    else if (!disabledButton && opponents.length === 5) 
+      setDisabledButton(false);
+  };
 
   const updateOpponents = () =>{
     setOpponents(
@@ -40,8 +50,13 @@ function App() {
     );
     // here handle all the calculations 
     setRankBlob(calculatePlayerChanges(opponents));
-  }
+  };
 
+  const handleOpponentRemoval = (index) =>{
+    setOpponents(opponents.filter( (_, id) => id !== index));
+    setRankBlob(calculatePlayerChanges(opponents));
+    handleStatisticsButton();    
+  };
 
   return (
     <main className="container">
@@ -49,14 +64,14 @@ function App() {
 
       {
         opponents.map(
-          oponent => {
-            return <PlayerCard round={oponent} updateOpponents={updateOpponents}/> 
+          (oponent, index) => {
+            return <PlayerCard key={index} round={oponent} updateOpponents={updateOpponents} removeOpponent={handleOpponentRemoval} index={index}/> 
           }
         )
       }
       <div className="grid">
         <button className="primary" onClick={addNewOpponent}>Add round</button>
-        <button className="secondary" onClick={handleModalClick}>Pokaż statystyki</button>
+        <button className="secondary" onClick={handleModalClick} on disabled={disabledButton}>Pokaż statystyki</button>
       </div>
       <Modal rankBlob={rankBlob} show={showModal} onClose={handleModalClick} />
     </main>

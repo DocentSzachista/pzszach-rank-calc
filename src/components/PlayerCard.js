@@ -3,7 +3,8 @@ import { rankingValues } from "../resources/requirements";
 const PlayerCard = (props) => {
     const round = props.round;
     const updateOpponents = props.updateOpponents;
-
+    const index = props.index;
+    const removeOpponent = props.removeOpponent;
     const updateGender = event =>{
         const newGender = event.target.value;
         round.gender = newGender
@@ -19,15 +20,30 @@ const PlayerCard = (props) => {
         round.score = parseFloat(event.target.value);
         updateOpponents();
     };
-    
+    const handleRemoval = event =>{
+        removeOpponent(index);
+    };
+
+    const headline = round.isPlayer ? (<><h1>Gracz</h1><h2></h2> </>) : (
+    <>
+        <h1>Runda {index}</h1>
+        <button className="secondary" onClick={handleRemoval}>Usuń</button>
+    </>);
+
+
     return (
         <article>
-            <hgroup>
-                <h1>
-                    {round.roundNumber === 0 ? "Gracz" : `Runda ${round.roundNumber}`  }
+            <hgroup className="grid">
+                {headline}
+                {/* <h1>
+                    {round.isPlayer  ? "Gracz" : `Runda ${index}`  }
                 </h1>
-                <h2>
-                </h2>
+
+                <button className="primary">
+                    Usuń
+                </button> */}
+                {/* <h2>
+                </h2> */}
             </hgroup>
             <div className="grid">
                 <label>Płeć
@@ -40,14 +56,14 @@ const PlayerCard = (props) => {
                     <select name="ranking" onChange={handleRanking}>
                     {    
                         rankingValues[round.gender].map(
-                            rank => {
-                                return <option value={rank.name}> {rank.name}({rank.value}) </option>;
+                            (rank, id) => {
+                                return <option key={id} value={rank.name}> {rank.name}({rank.value}) </option>;
                             }
                         )
                     }
                     </select>
                 </label>
-                { round.roundNumber === 0 ? "" :
+                { round.isPlayer ? "" :
                 <label>
                     Wynik
                     <select value={null} onChange={handleScore}>

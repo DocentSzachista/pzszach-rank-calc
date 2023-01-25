@@ -2,9 +2,11 @@ const Description = () =>{
 
     return (
         <div className="desc">
-            <h2>
-                Kalkulator norm rankingowych PZszach
-            </h2>
+            <div className="grid">
+                <h2>
+                    Kalkulator norm rankingowych PZszach
+                </h2>
+            </div>
             <div>
                 <details>
                     <summary>
