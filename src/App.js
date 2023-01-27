@@ -50,7 +50,6 @@ function App() {
     );
     // here handle all the calculations 
     setRankBlob(calculatePlayerChanges(opponents));
-    console.log(rankBlob);
   };
 
   const handleOpponentRemoval = (index) =>{
