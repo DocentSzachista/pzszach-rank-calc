@@ -7,7 +7,6 @@ import Description from "./components/Descritpion";
 function App() {
 
   const [opponents, setOpponents] = useState([{
-    // "roundNumber": 0,
     "category": "BK",
     "gender": "M",
     "isPlayer": true 
@@ -29,7 +28,7 @@ function App() {
       "category": "BK",
       "score": 0,
       "gender": "M"
-    }
+    };
     setOpponents(
       [...opponents, newOpponent]
     );
@@ -65,13 +64,16 @@ function App() {
       {
         opponents.map(
           (oponent, index) => {
-            return <PlayerCard key={index} round={oponent} updateOpponents={updateOpponents} removeOpponent={handleOpponentRemoval} index={index}/> 
+            return <PlayerCard key={index} round={oponent} 
+                    updateOpponents={updateOpponents} 
+                    removeOpponent={handleOpponentRemoval} 
+                    index={index}/> 
           }
         )
       }
       <div className="grid">
-        <button className="primary" onClick={addNewOpponent}>Add round</button>
-        <button className="secondary" onClick={handleModalClick} on disabled={disabledButton}>Pokaż statystyki</button>
+        <button className="primary" data-tooltip="Dodaj nowego przeciwnika" onClick={addNewOpponent}>Dodaj rundę</button>
+        <button className="secondary" data-tooltip="Tooltip" onClick={handleModalClick} on disabled={disabledButton}>Pokaż statystyki</button>
       </div>
       <Modal rankBlob={rankBlob} show={showModal} onClose={handleModalClick} />
     </main>

@@ -24,7 +24,7 @@ const PlayerCard = (props) => {
         removeOpponent(index);
     };
 
-    const headline = round.isPlayer ? (<><h1>Gracz</h1><h2></h2> </>) : (
+    const headline = round.isPlayer ? (<><h1>Gracz</h1><h2> </h2> </>) : (
     <>
         <h1>Runda {index}</h1>
         <button className="secondary" onClick={handleRemoval}>Usuń</button>
@@ -35,15 +35,6 @@ const PlayerCard = (props) => {
         <article>
             <hgroup className="grid">
                 {headline}
-                {/* <h1>
-                    {round.isPlayer  ? "Gracz" : `Runda ${index}`  }
-                </h1>
-
-                <button className="primary">
-                    Usuń
-                </button> */}
-                {/* <h2>
-                </h2> */}
             </hgroup>
             <div className="grid">
                 <label>Płeć

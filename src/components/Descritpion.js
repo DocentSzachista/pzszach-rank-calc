@@ -27,6 +27,26 @@ const Description = () =>{
                         został on pominięty. Po wstępnych testach jakie przeprowadziłem, wynika że przeprowadzone obliczenia zgadzają się
                         z innym <a href="http://szachygrodzisk.pl/kalkulator/" target="_blank" rel="noopener noreferrer">kalkulatorem</a>.
                     </p>
+                </details>
+                <details>
+                    <summary>
+                        Ile gier na ktorą kategorię?
+                    </summary>
+                    <ul>
+                        <li>
+                            V, IV - 5 gier
+                        </li>
+                        <li>
+                            III, II - 7 gier 
+                        </li>
+                        <li>
+                            II+, I, I+, I++ k, M - 9 gier
+                        </li>
+                    </ul>
+                    <p>
+                        Aby uzyskać kategorię I, K trzeba najpierw uzyskać kategorie częściowe.
+                        Te poziomy nie zezwalają na wbicie jednocześnie np II+ i I w jednym turnieju.
+                    </p>
                 </details>                
                 <details>
                     <summary>
