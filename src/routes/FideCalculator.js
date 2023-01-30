@@ -1,10 +1,16 @@
 import { useState } from "react";
+import Description from "../components/Descritpion";
 import Modal from "../components/Modal";
 const FideCalculator = () =>{
     const [playerRanking, setPlayerRanking] = useState('');
     const [opponentRanking, setOpponentRanking] = useState('');
     const [kValue, setKValue] = useState(40);
     const [score, setScore] = useState("");
+    const [blob, setBlob] = useState({
+        "currentRuz": undefined,
+        "normsAchieved": undefined
+    });
+    
     const handleSubmit = (event) =>{
 
         const exponent = (opponentRanking - playerRanking ) / 400; 
@@ -43,23 +49,21 @@ const FideCalculator = () =>{
     const handleOpponentOnChange = (event) =>{
         changeInputValue(event, setOpponentRanking);
     };
-    const [blob, setBlob] = useState({
-        "currentRuz": undefined,
-        "normsAchieved":[]
-    });
     const [showModal, setShowModal] = useState(false);
+
+    const descriptionBody = {
+        "title": "Kalkulator rankingu fide",
+        "listOfItems": [
+            {
+                "summary": "Co potrzebujesz?",
+                "content": <p>Ranking swój i przeciwnika oraz jaką masz stałą K. Możesz ją sprawdzić na stronie FIDE </p>
+            },
+        ]
+    }
 
     return ( 
     <>
-        <h1>Kalkulator rankingu FIDE</h1>
-        <details>
-            <summary>
-                Jak się liczy?
-            </summary>
-            <p>
-                placeholder
-            </p>
-        </details>
+        <Description data={descriptionBody} />
         <article>
             <header>
                  Policz zmianę rankingu
