@@ -1,10 +1,10 @@
-import "./styles/App.css";
-import PlayerCard from './components/PlayerCard';
-import Modal from "./components/Modal";
+import "../styles/App.css";
+import PlayerCard from '../components/PlayerCard';
+import Modal from "../components/Modal";
 import { useState } from 'react';
-import {calculatePlayerChanges } from "./utils";
-import Description from "./components/Descritpion";
-function App() {
+import {calculatePlayerChanges } from "../utils";
+import Description from "../components/Descritpion";
+function PzszachCalculator() {
 
   const [opponents, setOpponents] = useState([{
     "category": "BK",
@@ -58,7 +58,7 @@ function App() {
   };
 
   return (
-    <main className="container">
+    <>
       <Description />
 
       {
@@ -76,8 +76,8 @@ function App() {
         <button className="secondary" data-tooltip="Tooltip" onClick={handleModalClick} on disabled={disabledButton}>Pokaż statystyki</button>
       </div>
       <Modal rankBlob={rankBlob} show={showModal} onClose={handleModalClick} />
-    </main>
+    </>
   );
 }
 
-export default App;
+export default PzszachCalculator;
