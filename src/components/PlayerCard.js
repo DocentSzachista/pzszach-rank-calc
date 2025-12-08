@@ -45,7 +45,7 @@ const PlayerCard = (props) => {
                 </label>
                 <label>Ranking zawodnika
                     <select name="ranking" onChange={handleRanking}>
-                    {    
+                    {
                         rankingValues[round.gender].map(
                             (rank, id) => {
                                 return <option key={id} value={rank.name}> {rank.name}({rank.value}) </option>;
